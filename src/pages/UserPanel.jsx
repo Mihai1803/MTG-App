@@ -5,7 +5,7 @@ import Panel from '../components/Panel'
 import PostList from '../components/PostList'
 
 function UserPanel() {
-  
+
   return (
     <>
         <Navbar />

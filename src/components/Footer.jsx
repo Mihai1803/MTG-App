@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Link as ScrollLink } from 'react-scroll'
 import { animateScroll as scroll } from 'react-scroll'
@@ -9,6 +10,7 @@ import { faPhone, faEnvelope, faPrint, faHouse } from '@fortawesome/free-solid-s
 
 function Footer() {
   const [onPage, setOnPage] = useState(true)
+  const { user } = useSelector(state => state.auth)
   
 
   const scrollToAbout = () => {
@@ -66,9 +68,19 @@ function Footer() {
                                     (<Link to="/">About</Link>)
                                 }
                             </li>
-                            <li><Link to="/register">Register</Link></li>
-                            <li><Link to="/login">Login</Link></li>
-                            <li><Link to="/post">Posts</Link></li>
+                            {user ?
+                                (
+                                    <li><Link to="/userpanel">User Panel</Link></li>
+                                )
+                                :
+                                (
+                                    <>
+                                        <li><Link to="/register">Register</Link></li>
+                                        <li><Link to="/login">Login</Link></li>
+                                        <li><Link to="/post">Posts</Link></li>
+                                    </>
+                                )
+                            }
                             <li>
                                 <ScrollLink 
                                     to="main-footer"
@@ -103,13 +115,13 @@ function Footer() {
                         <div>
                             <FontAwesomeIcon icon={faHouse} className="social-footer-icon" />
                             Adress Location City
-                        </div>
+                        </div>c
                     </div>
                 </div>
                 <div className="register-footer">
                     <h3>CHECK OUR POSTS</h3>
                     <p>Lorem ipsum dolor sit amet.</p>
-                    <Link to="/post" className="footer-btn">Check Posts</Link>
+                    <Link to={user ? '/userpanel' : '/post'} className="footer-btn">Check Posts</Link>
                 </div>
             </div>
         </div>

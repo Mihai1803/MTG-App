@@ -509,9 +509,14 @@ body {
     display: none;
   }
   .main-footer {
-    display: grid;
-    grid-template-columns: repeat(2, 2fr);
-    margin-right: 5rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  .main-footer:first-child {
+    text-align: center;
+  }
+  .main-footer h3 {
+    text-align: center;
   }
   .list-footer {
     display: flex;

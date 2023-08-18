@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Post from './pages/Post'
 import UserPanel from './pages/UserPanel'
 import CreatePost from './pages/CreatePost'
+import PrivateRoute from './components/PrivateRoute'
 import './App.css'
 
 function App() {
@@ -16,9 +17,12 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/post' element={<Post />} />
-          <Route path='/userpanel' element={<UserPanel />} />
-          <Route path='/userpanel/create' element={<CreatePost />} />
-          
+          <Route path='/userpanel' element={<PrivateRoute />}>
+            <Route path='/userpanel' element={<UserPanel />} />
+          </Route>
+          <Route path='/userpanel' element={<PrivateRoute />}>
+            <Route path='/userpanel/create' element={<CreatePost />} />
+          </Route>
         </Routes>
       </Router>
 
