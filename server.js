@@ -1,4 +1,5 @@
 require('dotenv').config()
+const cors = require('cors')
 
 
 const express = require('express')
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 //Middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(cors())
 
 // Routes
 app.use('/api/user', require('./routes/userRoutes'))
