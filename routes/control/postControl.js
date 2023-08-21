@@ -18,14 +18,14 @@ const getPosts = asyncHandler( async (req, res) => {
 
 //@desc    PUT create a post
 //@route   /api/post
-//@access  public 
+//@access  private
 const createPost = asyncHandler( async (req, res) => {
   const { title, category, comment } = req.body
 
   // Validation
-  if (!title || !category || !comment) {
-   return res.status(400).send({ message: 'Please include all fields' })
-  }
+  // if (!title || !category || !comment) {
+  //  return res.status(500).send({ message: 'Please include all fields' })
+  // }
 
   // get user
   const user = await User.findById(req.user._id)
@@ -96,9 +96,36 @@ const getPost = asyncHandler( async (req, res) => {
   res.status(200).json(post)
 })
 
+//@desc    GET get user posts
+//@route   /api/post/all/:id
+//@access  private
+
+const getUserPosts = asyncHandler( async (req, res) => {
+
+  // get user
+  const user = await User.findById(req.user._id)
+  if (!user) {
+    return res.status(404).send({ message: 'Not authorized'})
+  }
+
+  // get post
+  const posts = await Post.find( { user: req.params.id })
+  if (posts.length === 0) {
+    return res.status(404).send({ message: 'Post not found'})
+  }
+  
+  //check if the IDs match
+  if (req.params.id !== user.id.toString()) {
+    return res.status(404).send({ message: 'Not authorized'})
+  } 
+
+  res.status(200).json(posts)
+})
+
 module.exports = {
   getPosts,
   createPost,
   deletePost,
-  getPost
+  getPost,
+  getUserPosts
 }
