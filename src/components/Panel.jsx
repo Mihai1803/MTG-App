@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 function Panel() {
 
   const { user } = useSelector(state => state.auth)
+  const { post } = useSelector(state => state.post)
 
   const date = new Date(user.created)
 
@@ -21,7 +22,7 @@ function Panel() {
                     <span><strong>Username:</strong> { user.name }</span>
                     <span><strong>Email:</strong> { user.email }</span>
                     <span><strong>Member since:</strong> {`${day}/${month < 10 ? `0${month}` : month}/${year}`}</span>
-                    <span><strong>Number of posts:</strong> {user.numberOfPosts}</span>
+                    <span><strong>Number of posts:</strong> {post ? post.length : '0'}</span>
                     <div>
                         <Link to="/userpanel/create" className="post-btn">Create a post</Link>
                     </div>
@@ -31,5 +32,6 @@ function Panel() {
     </section>
   )
 }
+
 
 export default Panel

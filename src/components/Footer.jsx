@@ -115,7 +115,7 @@ function Footer() {
                         <div>
                             <FontAwesomeIcon icon={faHouse} className="social-footer-icon" />
                             Adress Location City
-                        </div>c
+                        </div>
                     </div>
                 </div>
                 <div className="register-footer">
